@@ -1,4 +1,4 @@
-🍕 Sistema de Pizzaria
+#🍕 Sistema de Pizzaria
 
 Sistema completo de gerenciamento de pizzaria desenvolvido com Node.js, utilizando SQLite (sql.js) como banco de dados. A aplicação permite o cadastro de usuários, clientes, pizzas e pedidos, além de autenticação com JWT.
 
@@ -60,6 +60,8 @@ O sistema utiliza JWT (JSON Web Token) para autenticação.
 Faça login para obter um token
 Envie o token nas requisições protegidas:
 Authorization: Bearer SEU_TOKEN
+
+
 🌐 Interface Web
 
 A aplicação possui uma interface simples localizada em:
