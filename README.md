@@ -1,4 +1,4 @@
-#🍕 Sistema de Pizzaria
+# 🍕 Sistema de Pizzaria
 
 Sistema completo de gerenciamento de pizzaria desenvolvido com Node.js, utilizando SQLite (sql.js) como banco de dados. A aplicação permite o cadastro de usuários, clientes, pizzas e pedidos, além de autenticação com JWT.
 
