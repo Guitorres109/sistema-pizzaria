@@ -86,5 +86,5 @@ Fácil integração com Node.js
 
 ## 👨‍💻 Desenvolvedores
 
- Guilherme Barbosa torres🚀
- Nicolas Stekl Tordino🚀
+- Guilherme Barbosa torres🚀
+- Nicolas Stekl Tordino🚀
