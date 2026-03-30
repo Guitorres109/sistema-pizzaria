@@ -22,7 +22,7 @@ dotenv (variáveis de ambiente)
 cors
 ## 📁 Estrutura do Projeto
 📦 sistema_pizzaria
-- ├── index.js
+##### ├── index.js
 -     Arquivo principal do servidor
 - ├── routes-index.js
 -     Rotas da aplicação
