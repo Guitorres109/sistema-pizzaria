@@ -70,7 +70,7 @@ A aplicação possui uma interface simples localizada em:
 index.html
 
 Abra no navegador após iniciar o servidor.
-
+_______
 ## 📌 Scripts Disponíveis
 Script	Descrição
 npm start	Inicia o servidor
