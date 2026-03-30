@@ -63,7 +63,7 @@ Envie o token nas requisições protegidas:
 Authorization: Bearer SEU_TOKEN
 
 
-# 🌐 Interface Web
+## 🌐 Interface Web
 
 A aplicação possui uma interface simples localizada em:
 
@@ -86,5 +86,5 @@ Fácil integração com Node.js
 
 # 👨‍💻 Desenvolvedores
 
-## Guilherme Barbosa torres🚀
-## Nicolas Stekl Tordino🚀
+ Guilherme Barbosa torres🚀
+ Nicolas Stekl Tordino🚀
