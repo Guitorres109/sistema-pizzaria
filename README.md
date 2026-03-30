@@ -70,13 +70,13 @@ A aplicação possui uma interface simples localizada em:
 index.html
 
 Abra no navegador após iniciar o servidor.
-_______
+
 ## 📌 Scripts Disponíveis
 Script	Descrição
 npm start	Inicia o servidor
 npm run dev	Inicia com nodemon
 npm run seed	Popula o banco de dados
-# 📊 Banco de Dados
+## 📊 Banco de Dados
 
 O sistema utiliza SQLite com sql.js, permitindo:
 
@@ -84,7 +84,7 @@ Execução local sem necessidade de servidor externo
 Persistência simples de dados
 Fácil integração com Node.js
 
-# 👨‍💻 Desenvolvedores
+## 👨‍💻 Desenvolvedores
 
  Guilherme Barbosa torres🚀
  Nicolas Stekl Tordino🚀
