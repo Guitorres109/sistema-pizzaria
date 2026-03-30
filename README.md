@@ -2,15 +2,15 @@
 
 Sistema completo de gerenciamento de pizzaria desenvolvido com Node.js, utilizando SQLite (sql.js) como banco de dados. A aplicação permite o cadastro de usuários, clientes, pizzas e pedidos, além de autenticação com JWT.
 
-📌 Funcionalidades
-🔐 Autenticação de usuários (login com JWT)
-👤 Cadastro e gerenciamento de usuários
-🧑‍💼 Cadastro de clientes
-🍕 Cadastro de pizzas
-📦 Criação e gerenciamento de pedidos
-💾 Banco de dados SQLite (em memória ou persistente)
-🌐 Interface web simples (HTML, CSS e JavaScript)
-🛠️ Tecnologias Utilizadas
+- 📌 Funcionalidades
+- 🔐 Autenticação de usuários (login com JWT)
+- 👤 Cadastro e gerenciamento de usuários
+- 🧑‍💼 Cadastro de clientes
+- 🍕 Cadastro de pizzas
+- 📦 Criação e gerenciamento de pedidos
+- 💾 Banco de dados SQLite (em memória ou persistente)
+- 🌐 Interface web simples (HTML, CSS e JavaScript)
+- 🛠️ Tecnologias Utilizadas
 Node.js
 Express
 SQLite (via sql.js)
@@ -20,7 +20,7 @@ JWT (jsonwebtoken)
 bcryptjs (criptografia de senhas)
 dotenv (variáveis de ambiente)
 cors
-📁 Estrutura do Projeto
+# 📁 Estrutura do Projeto
 📦 sistema_pizzaria
 ├── index.js            # Arquivo principal do servidor
 ├── routes-index.js     # Rotas da aplicação
@@ -36,7 +36,8 @@ cors
 ├── style.css           # Estilos
 ├── .env.example        # Exemplo de variáveis de ambiente
 ├── package.json        # Dependências do projeto
-⚙️ Instalação
+
+# ⚙️ Instalação
 Clone o repositório:
 git clone <url-do-repositorio>
 cd sistema_pizzaria
@@ -46,7 +47,7 @@ Configure o arquivo .env:
 
 Crie um arquivo .env baseado no .env.example.
 
-▶️ Como Executar
+# ▶️ Como Executar
 🔹 Modo normal
 npm start
 🔹 Modo desenvolvimento (com nodemon)
@@ -62,7 +63,7 @@ Envie o token nas requisições protegidas:
 Authorization: Bearer SEU_TOKEN
 
 
-🌐 Interface Web
+# 🌐 Interface Web
 
 A aplicação possui uma interface simples localizada em:
 
@@ -70,12 +71,12 @@ index.html
 
 Abra no navegador após iniciar o servidor.
 
-📌 Scripts Disponíveis
+# 📌 Scripts Disponíveis
 Script	Descrição
 npm start	Inicia o servidor
 npm run dev	Inicia com nodemon
 npm run seed	Popula o banco de dados
-📊 Banco de Dados
+# 📊 Banco de Dados
 
 O sistema utiliza SQLite com sql.js, permitindo:
 
@@ -83,7 +84,7 @@ Execução local sem necessidade de servidor externo
 Persistência simples de dados
 Fácil integração com Node.js
 
-👨‍💻 Desenvolvedores
+# 👨‍💻 Desenvolvedores
 
-Guilherme Barbosa torres🚀
-Nicolas Stekl Tordino🚀
+## Guilherme Barbosa torres🚀
+## Nicolas Stekl Tordino🚀
