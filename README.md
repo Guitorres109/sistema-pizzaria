@@ -10,16 +10,16 @@ Sistema completo de gerenciamento de pizzaria desenvolvido com Node.js, utilizan
 - 📦 Criação e gerenciamento de pedidos
 - 💾 Banco de dados SQLite (em memória ou persistente)
 - 🌐 Interface web simples (HTML, CSS e JavaScript)
-- 🛠️ Tecnologias Utilizadas
-Node.js
-Express
-SQLite (via sql.js)
-JavaScript (ES6+)
-HTML5 + CSS3
-JWT (jsonwebtoken)
-bcryptjs (criptografia de senhas)
-dotenv (variáveis de ambiente)
-cors
+## 🛠️ Tecnologias Utilizadas:
+- Node.js
+- Express
+- SQLite (via sql.js)
+- JavaScript (ES6+)
+- HTML5 + CSS3
+- JWT (jsonwebtoken)
+- bcryptjs (criptografia de senhas)
+- dotenv (variáveis de ambiente)
+- cors
 ## 📁 Estrutura do Projeto
 📦 sistema_pizzaria
 #### ├── index.js
