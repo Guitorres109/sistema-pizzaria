@@ -22,20 +22,34 @@ dotenv (variáveis de ambiente)
 cors
 ## 📁 Estrutura do Projeto
 📦 sistema_pizzaria
-- ├── index.js            # Arquivo principal do servidor
-- ├── routes-index.js     # Rotas da aplicação
-- ├── auth.js             # Middleware de autenticação
-- ├── sqlite.js           # Configuração do banco de dados
-- ├── seed.js             # Script para popular o banco
-- ├── Cliente.js          # Model de cliente
-- ├── Usuario.js          # Model de usuário
-- ├── Pizza.js            # Model de pizza
-- ├── Pedido.js           # Model de pedido
-- ├── index.html          # Interface web
-- ├── script.js           # Lógica do front-end
-- ├── style.css           # Estilos
-- ├── .env.example        # Exemplo de variáveis de ambiente
-- ├── package.json        # Dependências do projeto
+- ├── index.js
+-     Arquivo principal do servidor
+- ├── routes-index.js
+-     Rotas da aplicação
+- ├── auth.js
+-     Middleware de autenticação
+- ├── sqlite.js
+-     Configuração do banco de dados
+- ├── seed.js
+-     Script para popular o banco
+- ├── Cliente.js
+-     Model de cliente
+- ├── Usuario.js
+-     Model de usuário
+- ├── Pizza.js
+-     Model de pizza
+- ├── Pedido.js
+-     Model de pedido
+- ├── index.html
+-     Interface web
+- ├── script.js
+-     Lógica do front-end
+- ├── style.css
+-     Estilos
+- ├── .env.example
+-     Exemplo de variáveis de ambiente
+- ├── package.json
+-     Dependências do projeto
 
 ## ⚙️ Instalação
 Clone o repositório:
@@ -45,7 +59,7 @@ Instale as dependências:
 npm install
 Configure o arquivo .env:
 
-Crie um arquivo .env baseado no .env.example.
+Crie um arquivo .env baseado
 
 ## ▶️ Como Executar
 🔹 Modo normal
