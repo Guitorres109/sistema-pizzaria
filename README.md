@@ -22,33 +22,33 @@ dotenv (variáveis de ambiente)
 cors
 ## 📁 Estrutura do Projeto
 📦 sistema_pizzaria
-##### ├── index.js
+#### ├── index.js
 -     Arquivo principal do servidor
-- ├── routes-index.js
+#### ├── routes-index.js
 -     Rotas da aplicação
-- ├── auth.js
+#### ├── auth.js
 -     Middleware de autenticação
-- ├── sqlite.js
+#### ├── sqlite.js
 -     Configuração do banco de dados
-- ├── seed.js
+#### ├── seed.js
 -     Script para popular o banco
-- ├── Cliente.js
+#### ├── Cliente.js
 -     Model de cliente
-- ├── Usuario.js
+#### ├── Usuario.js
 -     Model de usuário
-- ├── Pizza.js
+#### ├── Pizza.js
 -     Model de pizza
-- ├── Pedido.js
+#### ├── Pedido.js
 -     Model de pedido
-- ├── index.html
+#### ├── index.html
 -     Interface web
-- ├── script.js
+#### ├── script.js
 -     Lógica do front-end
-- ├── style.css
+#### ├── style.css
 -     Estilos
-- ├── .env.example
+#### ├── .env.example
 -     Exemplo de variáveis de ambiente
-- ├── package.json
+#### ├── package.json
 -     Dependências do projeto
 
 ## ⚙️ Instalação
