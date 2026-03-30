@@ -1,8 +1,11 @@
+//Arquivo que insere valores iniciais ao banco de dados
+
 require('dotenv').config();
 const { ready, run, query } = require('./src/database/sqlite');
 const bcrypt = require('bcryptjs');
 
 async function seed() {
+  //deletar dados do banco
   try {
     await ready;
     console.log('🧹 Limpando banco...');
@@ -18,9 +21,9 @@ async function seed() {
     } catch(_) { }
 
     console.log('✅ Banco limpo');
-
+    //Criptografar senhas:
     const hash = await bcrypt.hash('123456', 10);
-
+    //Inserir usuarios:
     run('INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, ?)',
       ['Administrador Master', 'admin@pizzaria.com', hash, 'Administrador']);
     run('INSERT INTO usuarios (nome, email, senha, perfil) VALUES (?, ?, ?, ?)',
@@ -30,7 +33,7 @@ async function seed() {
 
     console.log('✅ 3 usuários criados');
 
-    const clientes = [
+    const clientes = [ //Array de clientes
       ['Lucas Ferreira Santos',   '11991234501', {rua:'Rua das Acácias',numero:'142',bairro:'Vila Madalena',cidade:'São Paulo',cep:'05435-000'}, 'Alérgico a glúten'],
       ['Camila Rodrigues Lima',   '11991234502', {rua:'Av. Paulista',numero:'900',bairro:'Bela Vista',cidade:'São Paulo',cep:'01310-100'}, ''],
       ['Rafael Oliveira Costa',   '11991234503', {rua:'Rua Oscar Freire',numero:'55',bairro:'Jardins',cidade:'São Paulo',cep:'01426-001'}, 'Prefere entrega após 19h'],
@@ -59,7 +62,7 @@ async function seed() {
     }
     console.log('✅ 20 clientes criados');
 
-    const pizzas = [
+    const pizzas = [   //Array de Pizzas
       ['Calabresa','Clássica brasileira, presença garantida em qualquer mesa','Calabresa fatiada, cebola e azeitona',{P:35,M:45,G:55},'tradicional'],
       ['Margherita','A tradição italiana em cada fatia','Molho de tomate, mussarela e manjericão fresco',{P:34,M:44,G:54},'tradicional'],
       ['Portuguesa','Farta e completa, agrada a todos','Presunto, ovo, cebola, azeitona e pimentão',{P:38,M:48,G:58},'tradicional'],
@@ -80,8 +83,9 @@ async function seed() {
       ['Camarão VIP','Nossa pizza mais requintada de frutos do mar','Camarão GG flambado, cream cheese, aspargos e ovas de peixe',{P:72,M:90,G:108},'premium'],
       ['Chocolate com Morango','A sobremesa perfeita para encerrar a refeição','Chocolate ao leite, morango fresco e granulado',{P:42,M:52,G:62},'doce'],
       ['Nutella com Banana','Irresistível combinação que conquista de primeira','Nutella, banana caramelada, leite condensado e canela',{P:46,M:58,G:70},'doce'],
-    ];
+    ]; 
 
+    //Inserir todos os dados no banco
     for (const [nome, desc, ing, precos, cat] of pizzas) {
       run('INSERT INTO pizzas (nome, descricao, ingredientes, precos, categoria) VALUES (?, ?, ?, ?, ?)',
         [nome, desc, ing, JSON.stringify(precos), cat]);

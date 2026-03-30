@@ -2,6 +2,7 @@ const initSqlJs = require('sql.js');
 const fs        = require('fs');
 const path      = require('path');
 
+//COnectar ao Banco
 const DB_PATH = process.env.DB_PATH
   || path.join(__dirname, '..', '..', 'pizzaria.db');
 
@@ -19,8 +20,10 @@ const ready = (async () => {
 
   const db = state.db;
 
+  //verificar Banco completo
   db.run('PRAGMA foreign_keys = ON');
 
+  // criar tabela e não existir
   db.run(`
     CREATE TABLE IF NOT EXISTS usuarios (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,6 +37,7 @@ const ready = (async () => {
     )
   `);
 
+  // criar tabela e não existir
   db.run(`
     CREATE TABLE IF NOT EXISTS clientes (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,6 +51,7 @@ const ready = (async () => {
      )
   `);
 
+  // criar tabela e não existir
   db.run(`
     CREATE TABLE IF NOT EXISTS pizzas (
       id           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,6 +66,7 @@ const ready = (async () => {
     )
   `);
 
+  // criar tabela e não existir
   db.run(`
     CREATE TABLE IF NOT EXISTS pedidos (
       id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -81,6 +87,7 @@ const ready = (async () => {
     )
   `);
 
+  // criar tabela e não existir
   db.run(`
     CREATE TABLE IF NOT EXISTS itens_pedido (
       id             INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -100,12 +107,14 @@ const ready = (async () => {
   return db;
 })();
 
+//função de salvar dados no DB
 function salvar() {
   if (!state.db) return;
   const data = state.db.export();
   fs.writeFileSync(DB_PATH, Buffer.from(data));
 }
 
+//Enviar dados para query
 function query(sql, params = []) {
   const stmt    = state.db.prepare(sql);
   const results = [];
@@ -117,6 +126,7 @@ function query(sql, params = []) {
   return results;
 }
 
+//
 function run(sql, params = []) {
   state.db.run(sql, params);
   const meta = query('SELECT last_insert_rowid() as id, changes() as changes');
@@ -127,9 +137,11 @@ function run(sql, params = []) {
   };
 }
 
+//Obter dados do banco
 function get(sql, params = []) {
   const rows = query(sql, params);
   return rows[0] || null;
 }
 
+//Exportar modulos
 module.exports = { ready, query, run, get, salvar };
