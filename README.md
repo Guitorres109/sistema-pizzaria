@@ -23,7 +23,7 @@ cors
 ## 📁 Estrutura do Projeto
 📦 sistema_pizzaria
 - ├── index.js
--     Arquivo principal do servidor
+Arquivo principal do servidor
 - ├── routes-index.js
 -     Rotas da aplicação
 - ├── auth.js
