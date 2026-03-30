@@ -71,7 +71,7 @@ index.html
 
 Abra no navegador após iniciar o servidor.
 
-# 📌 Scripts Disponíveis
+## 📌 Scripts Disponíveis
 Script	Descrição
 npm start	Inicia o servidor
 npm run dev	Inicia com nodemon
