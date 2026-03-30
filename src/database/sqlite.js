@@ -21,7 +21,7 @@ const ready = (async () => {
 
   db.run('PRAGMA foreign_keys = ON');
 
-  db.run(\`
+  db.run(`
     CREATE TABLE IF NOT EXISTS usuarios (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
       nome        TEXT    NOT NULL,
@@ -32,9 +32,9 @@ const ready = (async () => {
       created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
       updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
     )
-  \`);
+  `);
 
-  db.run(\`
+  db.run(`
     CREATE TABLE IF NOT EXISTS clientes (
       id          INTEGER PRIMARY KEY AUTOINCREMENT,
       nome        TEXT    NOT NULL,
@@ -44,10 +44,10 @@ const ready = (async () => {
       ativo       INTEGER NOT NULL DEFAULT 1,
       created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
       updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
-    )
-  \`);
+     )
+  `);
 
-  db.run(\`
+  db.run(`
     CREATE TABLE IF NOT EXISTS pizzas (
       id           INTEGER PRIMARY KEY AUTOINCREMENT,
       nome         TEXT    NOT NULL,
@@ -59,9 +59,9 @@ const ready = (async () => {
       created_at   TEXT    NOT NULL DEFAULT (datetime('now')),
       updated_at   TEXT    NOT NULL DEFAULT (datetime('now'))
     )
-  \`);
+  `);
 
-  db.run(\`
+  db.run(`
     CREATE TABLE IF NOT EXISTS pedidos (
       id              INTEGER PRIMARY KEY AUTOINCREMENT,
       numero_pedido   INTEGER,
@@ -79,9 +79,9 @@ const ready = (async () => {
       created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
       updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
     )
-  \`);
+  `);
 
-  db.run(\`
+  db.run(`
     CREATE TABLE IF NOT EXISTS itens_pedido (
       id             INTEGER PRIMARY KEY AUTOINCREMENT,
       pedido_id      INTEGER NOT NULL REFERENCES pedidos(id),
@@ -92,7 +92,7 @@ const ready = (async () => {
       preco_unitario REAL    NOT NULL DEFAULT 0,
       subtotal       REAL    NOT NULL DEFAULT 0
     )
-  \`);
+  `);
 
   salvar();
 

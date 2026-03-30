@@ -1,13 +1,13 @@
 const { ready, query, run, get } = require('../database/sqlite');
 
-const SELECT_PEDIDO = \`
+const SELECT_PEDIDO = `
   SELECT
     p.*,
     c.nome     AS cliente_nome,
     c.telefone AS cliente_telefone
   FROM pedidos p
   LEFT JOIN clientes c ON c.id = p.cliente_id
-\`;
+`;
 
 function formatarPedido(row, itens = []) {
   if (!row) return null;
@@ -98,22 +98,22 @@ const Pedido = {
     const contagem     = get('SELECT COUNT(*) as total FROM pedidos');
     const numeroPedido = (contagem?.total || 0) + 1;
 
-    const infoPedido = run(\`
+    const infoPedido = run(`
       INSERT INTO pedidos
         (numero_pedido, cliente_id, subtotal, taxa_entrega, total,
          forma_pagamento, troco, observacoes, mesa, origem, garcom_id)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    \`, [numeroPedido, clienteId, subtotal, taxaEntrega || 0, total,
+    `, [numeroPedido, clienteId, subtotal, taxaEntrega || 0, total,
         formaPagamento, troco || 0, observacoes, mesa, origem, garcomId]);
 
     const pedidoId = infoPedido.lastInsertRowid;
 
     for (const it of itensProcessados) {
-      run(\`
+      run(`
         INSERT INTO itens_pedido
           (pedido_id, pizza_id, nome_pizza, tamanho, quantidade, preco_unitario, subtotal)
         VALUES (?, ?, ?, ?, ?, ?, ?)
-      \`, [pedidoId, it.pizzaId, it.nomePizza, it.tamanho, it.quantidade, it.precoUnitario, it.subtotal]);
+      `, [pedidoId, it.pizzaId, it.nomePizza, it.tamanho, it.quantidade, it.precoUnitario, it.subtotal]);
     }
 
     return this.findById(pedidoId);

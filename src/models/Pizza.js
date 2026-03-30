@@ -49,7 +49,7 @@ const Pizza = {
       ? { P: precos.P ?? precosAtuais.P, M: precos.M ?? precosAtuais.M, G: precos.G ?? precosAtuais.G }
       : precosAtuais;
 
-    run(\`
+    run(`
       UPDATE pizzas SET
         nome         = ?,
         descricao    = ?,
@@ -59,7 +59,7 @@ const Pizza = {
         categoria    = ?,
         updated_at   = datetime('now')
       WHERE id = ?
-    \`, [
+    `, [
       nome         ?? atual.nome,
       descricao    ?? atual.descricao,
       ingredientes ?? atual.ingredientes,

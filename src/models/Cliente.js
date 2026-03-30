@@ -54,7 +54,7 @@ const Cliente = {
     const endAtual = JSON.parse(atual.endereco || '{}');
     const endFinal = endereco ? { ...endAtual, ...endereco } : endAtual;
 
-    run(\`
+    run(`
       UPDATE clientes SET
         nome        = ?,
         telefone    = ?,
@@ -63,7 +63,7 @@ const Cliente = {
         ativo       = ?,
         updated_at  = datetime('now')
       WHERE id = ?
-    \`, [
+    `, [
       nome        ?? atual.nome,
       telefone    ?? atual.telefone,
       JSON.stringify(endFinal),
