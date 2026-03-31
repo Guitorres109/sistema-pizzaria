@@ -1,14 +1,27 @@
+//====================================
+//rota da Api
+//====================================
+
 const API = '/api';
 
 let cPizzas   = [];
 let cClientes = [];
 
+//====================================
+//Variaveis
+//====================================
+
 let TOKEN          = localStorage.getItem('pz_token') || '';
 let USUARIO_LOGADO = JSON.parse(localStorage.getItem('pz_usuario') || 'null');
 let mesaEmFechamento = null;
 
+//====================================
+//função de fazer login
+//====================================
+
 async function fazerLogin() {
-  const email = document.getElementById('l-email').value.trim();
+  //Variaveis de elementos do HTML
+  const email = document.getElementById('l-email').value.trim(); 
   const senha = document.getElementById('l-senha').value;
   const btn   = document.getElementById('btn-login');
   const erro  = document.getElementById('login-erro');
@@ -50,6 +63,10 @@ async function fazerLogin() {
   }
 }
 
+//====================================
+//função de fazer logout
+//====================================
+
 function sair() {
   TOKEN = '';
   USUARIO_LOGADO = null;
@@ -63,6 +80,10 @@ if (TOKEN && USUARIO_LOGADO) {
   aplicarPerfil(USUARIO_LOGADO);
   document.body.classList.add('logado');
 }
+
+//====================================
+//função para mostrar um notifiação de que algo foi cadastrado com sucesso
+//====================================
 
 function toast(msg, tipo = 'ok') {
   const el = document.getElementById('toast');
@@ -82,6 +103,10 @@ function R$(v) {
   return 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');
 }
 
+//====================================
+//Atualizar status de pedidos
+//====================================
+
 function badge(s) {
   const r = {
     recebido:     '📥 Recebido',
@@ -92,6 +117,10 @@ function badge(s) {
   };
   return `<span class="badge b-${s}">${r[s] || s}</span>`;
 }
+
+//====================================
+//função de fconectar com a API
+//====================================
 
 async function api(method, url, body) {
   const opts = {
@@ -110,6 +139,10 @@ async function api(method, url, body) {
   if (!res.ok) throw new Error(data.erro || 'Erro na requisição');
   return data;
 }
+
+//====================================
+//Enviar perfil de usuario para usuarios e de ADM para Administradores
+//====================================
 
 function aplicarPerfil(usuario) {
   document.getElementById('sb-nome').textContent   = usuario.nome;
@@ -156,6 +189,10 @@ function aplicarPerfil(usuario) {
     ir('dashboard', document.querySelector('[onclick*="dashboard"]'));
   }
 }
+
+//====================================
+//função de atualizar dados no HTML
+//====================================
 
 async function carregarMesas(mesaFiltro = null) {
   const grid = document.getElementById('grid-mesas');
@@ -422,6 +459,10 @@ function ir(pg, btn) {
   if (loaders[pg]) loaders[pg]();
 }
 
+//====================================
+//função de carregar dashboard
+//====================================
+
 async function carregarDashboard() {
   const h = new Date().getHours();
   const s = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
@@ -473,6 +514,10 @@ async function carregarDashboard() {
   } catch (e) { toast('Erro dashboard: ' + e.message, 'err'); }
 }
 
+//====================================
+//função de carregar todas as pizzas
+//====================================
+
 async function carregarPizzas() {
   const el = document.getElementById('tbl-pizzas');
   el.innerHTML = '<div class="spin-wrap"><div class="spin"></div> Carregando...</div>';
@@ -515,6 +560,10 @@ function abrirPizza() {
   abrir('m-pizza');
 }
 
+//====================================
+//função de editar pizza no DB
+//====================================
+
 function editarPizza(id) {
   const p = cPizzas.find(x => x._id === id);
   if (!p) return;
@@ -530,6 +579,10 @@ function editarPizza(id) {
   document.getElementById('p-disp').value = String(p.disponivel);
   abrir('m-pizza');
 }
+
+//====================================
+//função de salvar pizzas no DB
+//====================================
 
 async function salvarPizza() {
   const id   = document.getElementById('p-id').value;
@@ -558,6 +611,10 @@ async function salvarPizza() {
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
 
+//====================================
+//função de deletar pizzas do cardapio
+//====================================
+
 async function deletarPizza(id, nome) {
   if (!confirm(`Deletar "${nome}"?`)) return;
   try {
@@ -566,6 +623,10 @@ async function deletarPizza(id, nome) {
     carregarPizzas();
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
+
+//====================================
+//função de carregar clientes
+//====================================
 
 async function carregarClientes(busca = '') {
   const el = document.getElementById('tbl-clientes');
@@ -604,12 +665,20 @@ function buscarCli(v) {
   _t = setTimeout(() => carregarClientes(v), 400);
 }
 
+//====================================
+//função de abrir cliente
+//====================================
+
 function abrirCliente() {
   document.getElementById('m-cli-t').textContent = 'Novo Cliente';
   ['c-id','c-nome','c-tel','c-rua','c-num','c-bairro','c-cidade','c-cep','c-comp','c-obs']
     .forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
   abrir('m-cliente');
 }
+
+//====================================
+//função de editar cliente
+//====================================
 
 function editarCliente(id) {
   const c = cClientes.find(x => x._id === id);
@@ -627,6 +696,10 @@ function editarCliente(id) {
   document.getElementById('c-obs').value    = c.observacoes || '';
   abrir('m-cliente');
 }
+
+//====================================
+//função de salvar novo cliente
+//====================================
 
 async function salvarCliente() {
   const id   = document.getElementById('c-id').value;
@@ -656,6 +729,10 @@ async function salvarCliente() {
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
 
+//====================================
+//função de deletar clientes
+//====================================
+
 async function deletarCliente(id, nome) {
   if (!confirm(`Deletar "${nome}"?`)) return;
   try {
@@ -664,6 +741,10 @@ async function deletarCliente(id, nome) {
     carregarClientes();
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
+
+//====================================
+//função de carregar pedidos
+//====================================
 
 async function carregarPedidos() {
   const el = document.getElementById('tbl-pedidos');
@@ -699,6 +780,10 @@ async function carregarPedidos() {
   }
 }
 
+//====================================
+//função de abrir pedidos
+//====================================
+
 async function abrirPedido() {
   try {
     if (!cPizzas.length)   cPizzas   = await api('GET', '/pizzas');
@@ -720,6 +805,10 @@ async function abrirPedido() {
   addItem();
   abrir('m-pedido');
 }
+
+//====================================
+//função de adicionar item
+//====================================
 
 function addItem() {
   const d = document.createElement('div');
@@ -756,11 +845,19 @@ function recalc() {
   document.getElementById('ped-tot').textContent = R$(sub + taxa);
 }
 
+//====================================
+//função de fcalcular troco
+//====================================
+
 function toggleTroco() {
   const pag = document.getElementById('ped-pag').value;
   document.getElementById('wrap-troco').style.display =
     pag === 'dinheiro' ? 'block' : 'none';
 }
+
+//====================================
+//função de salvar pedido
+//====================================
 
 async function salvarPedido() {
   const cliId = document.getElementById('ped-cli').value;
@@ -797,11 +894,19 @@ async function salvarPedido() {
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
 
+//====================================
+//função de abrir status de pedido
+//====================================
+
 function abrirStatus(id, status) {
   document.getElementById('st-id').value  = id;
   document.getElementById('st-val').value = status;
   abrir('m-status');
 }
+
+//====================================
+//função de salavr status de pedido
+//====================================
 
 async function salvarStatus() {
   const id     = document.getElementById('st-id').value;
@@ -814,6 +919,10 @@ async function salvarStatus() {
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
 
+//====================================
+//função de deletar pedido
+//====================================
+
 async function deletarPedido(id) {
   if (!confirm('Deletar este pedido?')) return;
   try {
@@ -822,6 +931,10 @@ async function deletarPedido(id) {
     carregarPedidos();
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
+
+//====================================
+//função de carregar usuarios
+//====================================
 
 async function carregarUsuarios() {
   const el = document.getElementById('tbl-usuarios');
@@ -852,11 +965,19 @@ async function carregarUsuarios() {
   }
 }
 
+//====================================
+//função de abrir usuarios
+//====================================
+
 function abrirUsuario() {
   ['u-nome','u-email','u-senha'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('u-perfil').value = 'Atendente';
   abrir('m-usuario');
 }
+
+//====================================
+//função de salvar usuarios
+//====================================
 
 async function salvarUsuario() {
   const nome  = document.getElementById('u-nome').value.trim();
@@ -874,6 +995,10 @@ async function salvarUsuario() {
     carregarUsuarios();
   } catch (e) { toast('Erro: ' + e.message, 'err'); }
 }
+
+//====================================
+//função de deletar usuarios
+//====================================
 
 async function deletarUsuario(id, nome) {
   if (!confirm(`Deletar "${nome}"?`)) return;

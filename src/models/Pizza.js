@@ -1,5 +1,7 @@
 const { ready, query, run, get } = require('../database/sqlite');
 
+
+//Formatar pizza
 function formatarPizza(row) {
   if (!row) return null;
   return {
@@ -16,8 +18,10 @@ function formatarPizza(row) {
   };
 }
 
+//Objeto de pizza
 const Pizza = {
 
+  //Buscar todas as pizzas
   async findAll() {
     await ready;
     return query('SELECT * FROM pizzas ORDER BY categoria, nome').map(formatarPizza);
@@ -39,6 +43,7 @@ const Pizza = {
     return this.findById(info.lastInsertRowid);
   },
 
+  //Update de modelos de pizza
   async update(id, { nome, descricao, ingredientes, precos, disponivel, categoria }) {
     await ready;
     const atual = get('SELECT * FROM pizzas WHERE id = ?', [id]);
@@ -71,6 +76,8 @@ const Pizza = {
 
     return this.findById(id);
   },
+
+  //Deletar pizzas do banco de dados
 
   async delete(id) {
     await ready;

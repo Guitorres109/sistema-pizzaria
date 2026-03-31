@@ -17,6 +17,7 @@ function formatarUsuario(row) {
 
 const Usuario = {
 
+  //Pegar todos os usuarios
   async findAll() {
     await ready;
     const rows = query(`
@@ -26,11 +27,13 @@ const Usuario = {
     return rows.map(formatarUsuario);
   },
 
+  //Buscar usuarios pore email
   async findByEmail(email) {
     await ready;
     return get('SELECT * FROM usuarios WHERE email = ?', [email.toLowerCase().trim()]);
   },
 
+  //Buscar usuarios por ID
   async findById(id) {
     await ready;
     const row = get(`
@@ -40,6 +43,7 @@ const Usuario = {
     return formatarUsuario(row);
   },
 
+  //Criar usuarios 
   async create({ nome, email, senha, perfil = 'Atendente' }) {
     await ready;
     const hash = await bcrypt.hash(senha, 10);
@@ -50,6 +54,7 @@ const Usuario = {
     return this.findById(info.lastInsertRowid);
   },
 
+  //Atualizar usuarios
   async update(id, { nome, email, senha, perfil, ativo }) {
     await ready;
     const atual = get('SELECT * FROM usuarios WHERE id = ?', [id]);
@@ -79,6 +84,7 @@ const Usuario = {
     return this.findById(id);
   },
 
+  //Deletar usuarios
   async delete(id) {
     await ready;
     const info = run('DELETE FROM usuarios WHERE id = ?', [id]);

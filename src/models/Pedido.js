@@ -9,6 +9,7 @@ const SELECT_PEDIDO = `
   LEFT JOIN clientes c ON c.id = p.cliente_id
 `;
 
+//Formatar pedido de pizza
 function formatarPedido(row, itens = []) {
   if (!row) return null;
   return {
@@ -45,8 +46,10 @@ function formatarPedido(row, itens = []) {
   };
 }
 
+//Objeto de pedido
 const Pedido = {
 
+  //Buscar todos os pedidos
   async findAll({ garcomId } = {}) {
     await ready;
     let rows;
@@ -61,6 +64,7 @@ const Pedido = {
     });
   },
 
+  //Buscar pedidos por ID
   async findById(id) {
     await ready;
     const row = get(`${SELECT_PEDIDO} WHERE p.id = ?`, [id]);
@@ -69,6 +73,7 @@ const Pedido = {
     return formatarPedido(row, itens);
   },
 
+  //Criar pedido 
   async create({ clienteId, itens, taxaEntrega = 0, formaPagamento, troco = 0, observacoes = '', mesa = null, origem = 'balcao', garcomId = null }) {
     await ready;
 
@@ -98,6 +103,7 @@ const Pedido = {
     const contagem     = get('SELECT COUNT(*) as total FROM pedidos');
     const numeroPedido = (contagem?.total || 0) + 1;
 
+    //Informações de pedido
     const infoPedido = run(`
       INSERT INTO pedidos
         (numero_pedido, cliente_id, subtotal, taxa_entrega, total,
@@ -119,6 +125,8 @@ const Pedido = {
     return this.findById(pedidoId);
   },
 
+  //Atuializar pedidos
+  
   async updateStatus(id, status) {
     await ready;
     const info = run(
@@ -127,6 +135,8 @@ const Pedido = {
     );
     return info.changes > 0 ? this.findById(id) : null;
   },
+
+  //excluir pedidos
 
   async delete(id) {
     await ready;

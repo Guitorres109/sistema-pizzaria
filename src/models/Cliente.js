@@ -1,5 +1,6 @@
 const { ready, query, run, get } = require('../database/sqlite');
 
+//Formatar todos os clientes do banco
 function formatarCliente(row) {
   if (!row) return null;
   return {
@@ -15,6 +16,7 @@ function formatarCliente(row) {
   };
 }
 
+//Objeto de cliente
 const Cliente = {
 
   async findAll(busca = '') {
@@ -32,11 +34,13 @@ const Cliente = {
     return rows.map(formatarCliente);
   },
 
+  //Procurar cliente por ID
   async findById(id) {
     await ready;
     return formatarCliente(get('SELECT * FROM clientes WHERE id = ?', [id]));
   },
 
+  //Criar novo cliente
   async create({ nome, telefone, endereco = {}, observacoes = '' }) {
     await ready;
     const info = run(
@@ -46,6 +50,7 @@ const Cliente = {
     return this.findById(info.lastInsertRowid);
   },
 
+  //Atualizar cadastro de cliente
   async update(id, { nome, telefone, endereco, observacoes, ativo }) {
     await ready;
     const atual = get('SELECT * FROM clientes WHERE id = ?', [id]);
@@ -75,6 +80,7 @@ const Cliente = {
     return this.findById(id);
   },
 
+  //Deletar cliente
   async delete(id) {
     await ready;
     const info = run('DELETE FROM clientes WHERE id = ?', [id]);

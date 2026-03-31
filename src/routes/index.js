@@ -1,3 +1,8 @@
+//====================================
+//Rotas basicas para obter dados
+//====================================
+
+
 const express  = require('express');
 const jwt      = require('jsonwebtoken');
 const router   = express.Router();
@@ -7,6 +12,10 @@ const Usuario  = require('../models/Usuario');
 const Pizza    = require('../models/Pizza');
 const Cliente  = require('../models/Cliente');
 const Pedido   = require('../models/Pedido');
+
+//====================================
+//Rota de autentificação de login 
+//====================================
 
 router.post('/auth/login', async (req, res) => {
   try {
@@ -29,10 +38,18 @@ router.post('/auth/login', async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para obter todas as pizzas 
+//====================================
+
 router.get('/pizzas', auth, async (req, res) => {
   try { res.json(await Pizza.findAll()); }
   catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para obter pizzas por ID
+//====================================
 
 router.get('/pizzas/:id', auth, async (req, res) => {
   try {
@@ -42,6 +59,10 @@ router.get('/pizzas/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para criar pizzas
+//====================================
+
 router.post('/pizzas', auth, async (req, res) => {
   try {
     if (!req.body.nome || !req.body.ingredientes)
@@ -49,6 +70,10 @@ router.post('/pizzas', auth, async (req, res) => {
     res.status(201).json(await Pizza.create(req.body));
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para atualizar cadastro de pizzas
+//====================================
 
 router.put('/pizzas/:id', auth, async (req, res) => {
   try {
@@ -58,6 +83,10 @@ router.put('/pizzas/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para deletar dados de pizzas
+//====================================
+
 router.delete('/pizzas/:id', auth, async (req, res) => {
   try {
     const ok = await Pizza.delete(req.params.id);
@@ -66,10 +95,18 @@ router.delete('/pizzas/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para obter todos dados dos clientes
+//====================================
+
 router.get('/clientes', auth, async (req, res) => {
   try { res.json(await Cliente.findAll(req.query.busca)); }
   catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para obter dados dos clientes por ID
+//====================================
 
 router.get('/clientes/:id', auth, async (req, res) => {
   try {
@@ -79,6 +116,10 @@ router.get('/clientes/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para criar novo cliente
+//====================================
+
 router.post('/clientes', auth, async (req, res) => {
   try {
     if (!req.body.nome || !req.body.telefone)
@@ -86,6 +127,10 @@ router.post('/clientes', auth, async (req, res) => {
     res.status(201).json(await Cliente.create(req.body));
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para atualizar cadastro de cliente
+//====================================
 
 router.put('/clientes/:id', auth, async (req, res) => {
   try {
@@ -95,6 +140,10 @@ router.put('/clientes/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para deletar os clientes
+//====================================
+
 router.delete('/clientes/:id', auth, async (req, res) => {
   try {
     const ok = await Cliente.delete(req.params.id);
@@ -102,6 +151,10 @@ router.delete('/clientes/:id', auth, async (req, res) => {
     res.json({ mensagem: 'Cliente deletado' });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para obter todos os pedidos
+//====================================
 
 router.get('/pedidos', auth, async (req, res) => {
   try {
@@ -111,6 +164,10 @@ router.get('/pedidos', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para obter pedidos por ID
+//====================================
+
 router.get('/pedidos/:id', auth, async (req, res) => {
   try {
     const p = await Pedido.findById(req.params.id);
@@ -118,6 +175,10 @@ router.get('/pedidos/:id', auth, async (req, res) => {
     res.json(p);
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para atualizar pedidos
+//====================================
 
 router.post('/pedidos', auth, async (req, res) => {
   try {
@@ -140,6 +201,10 @@ router.post('/pedidos', auth, async (req, res) => {
   } catch (e) { res.status(400).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para atualizar status dos pedidos por ID
+//====================================
+
 router.patch('/pedidos/:id/status', auth, async (req, res) => {
   try {
     const validos = ['recebido','em_preparo','saiu_entrega','entregue','cancelado'];
@@ -151,6 +216,10 @@ router.patch('/pedidos/:id/status', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para excluir pedidos
+//====================================
+
 router.delete('/pedidos/:id', auth, async (req, res) => {
   try {
     const ok = await Pedido.delete(req.params.id);
@@ -159,6 +228,10 @@ router.delete('/pedidos/:id', auth, async (req, res) => {
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
 
+//====================================
+//Rota para obter todos os usuarios
+//====================================
+
 router.get('/usuarios', auth, async (req, res) => {
   try {
     if (req.usuario.perfil !== 'Administrador')
@@ -166,6 +239,10 @@ router.get('/usuarios', auth, async (req, res) => {
     res.json(await Usuario.findAll());
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para criar novos usuarios
+//====================================
 
 router.post('/usuarios', auth, async (req, res) => {
   try {
@@ -181,6 +258,10 @@ router.post('/usuarios', auth, async (req, res) => {
   }
 });
 
+//====================================
+//Rota para atualizar ID 
+//====================================
+
 router.put('/usuarios/:id', auth, async (req, res) => {
   try {
     if (req.usuario.perfil !== 'Administrador')
@@ -190,6 +271,10 @@ router.put('/usuarios/:id', auth, async (req, res) => {
     res.json(u);
   } catch (e) { res.status(500).json({ erro: e.message }); }
 });
+
+//====================================
+//Rota para deletar os usuarios 
+//====================================
 
 router.delete('/usuarios/:id', auth, async (req, res) => {
   try {

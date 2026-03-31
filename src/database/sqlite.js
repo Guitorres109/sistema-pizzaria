@@ -126,7 +126,7 @@ function query(sql, params = []) {
   return results;
 }
 
-//
+//Rodar select no DB
 function run(sql, params = []) {
   state.db.run(sql, params);
   const meta = query('SELECT last_insert_rowid() as id, changes() as changes');
